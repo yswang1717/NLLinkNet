@@ -1,0 +1,9 @@
+numpy
+matplotlib
+scikit-image
+scipy 
+pickle
+argparse
+torch==1.0.0
+torchvision==0.2.1 
+opencv-python==3.4.0.12
