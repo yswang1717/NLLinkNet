@@ -1,5 +1,5 @@
 #Train 
-python3 train.py --model NL34_LinkNet --name 'NL34_LinkNet' --crop_size 1024 1024 --init_lr 0.0003 --dataset '../dataset/Road/train/' --load ""
+python3 train.py --model NL34_LinkNet --name 'NL34_LinkNet' --crop_size 1024 1024 --init_lr 0.0003 --dataset '../dataset/Road/train/' --load "" 
 #Train w loading (download or train models before run this line) 
 python3 train.py --model NL34_LinkNet --name 'NL34_LinkNet' --crop_size 1024 1024 --init_lr 0.0003 --dataset '../dataset/Road/train/' --load "weights/NL34_LinkNet"
 
@@ -22,12 +22,13 @@ python3 train.py --model UNet --name 'UNet' --crop_size 1024 1024 --init_lr 0.00
 
 
 #Test 
+python3 test.py --model model_name --name 'weight name' --source '/path/of/source/' --scales 1.0 --target 'submit dir name'
 
 #Test on valid set 
-python3 test.py --model NL4_LinkNet --name 'NL4_LinkNet' --source '../dataset/Road/valid' --scales 1.0 --target 'NL4_LinkNet_valid'
+python3 test.py --model NL34_LinkNet --name 'NL34_LinkNet' --source '../dataset/Road/valid' --scales 1.0 --target 'NL4_LinkNet_valid'
 
 #Test on test set
-python3 test.py --model NL4_LinkNet --name 'NL4_LinkNet' --source '../dataset/Road/test' --scales 1.0 --target 'NL4_LinkNet_test'
+python3 test.py --model NL34_LinkNet --name 'NL34_LinkNet' --source '../dataset/Road/test' --scales 1.0 --target 'NL4_LinkNet_test'
 
 #multi scale testing in series. 
 model=NL34_LinkNet 

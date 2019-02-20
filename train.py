@@ -16,7 +16,7 @@ from train_framework import TrainFramework
 
 
 def train_models(model, name, crop_size=(1024, 1024), init_learning_rate=0.0003, dataset='../dataset/Road/train/',
-                 load='', BATCHSIZE_PER_CARD=4):
+                 load='', BATCHSIZE_PER_CARD=4,total_epoch=500,weight_decay_factor=5.0):
     if type(crop_size) == tuple:
         crop_size = list(crop_size)
 
@@ -42,7 +42,6 @@ def train_models(model, name, crop_size=(1024, 1024), init_learning_rate=0.0003,
     mylog = Logger('logs/' + name + '.log')
     tic = time()
     no_optim = 0
-    total_epoch = 500
     train_epoch_best_loss = 100.
     for epoch in range(1, total_epoch + 1):
 
@@ -75,7 +74,7 @@ def train_models(model, name, crop_size=(1024, 1024), init_learning_rate=0.0003,
             if solver.old_lr < 5e-6:  # 5e-7
                 break
             solver.load('weights/' + name + '.th')
-            solver.update_lr(5.0, factor=True, mylog=mylog)
+            solver.update_lr(weight_decay_factor, factor=True, mylog=mylog)
         mylog.flush()
 
     mylog.write('Finish!')
@@ -90,7 +89,8 @@ def main():
     parser.add_argument("--init_lr", help="set the initial learning rate", default=0.0003, type=float)
     parser.add_argument("--dataset", help="the path of train datasets", default="../dataset/Road/train/")
     parser.add_argument("--load", help="the path of the weight file for loading", default="")
-
+    parser.add_argument("--total_epoch", help="total number of epochs", type=int, default=500)
+    parser.add_argument("--weight_decay_factor", help="wegith decay factor", type=float, default=5.0)
     args = parser.parse_args()
 
     models = {'NL3_LinkNet': NL3_LinkNet, 'NL4_LinkNet': NL4_LinkNet, 'NL34_LinkNet': NL34_LinkNet,
@@ -105,9 +105,11 @@ def main():
     init_learning_rate = args.init_lr
     dataset = args.dataset
     load = args.load
-
+    total_epoch = args.total_epoch
+    weight_decay_factor = args.weight_decay_factor 
+    
     train_models(model=model, name=name, crop_size=crop_size, init_learning_rate=init_learning_rate, dataset=dataset,
-                 load=load)
+                 load=load,total_epoch=total_epoch,weight_decay_factor=weight_decay_factor)
     test_models(model=model, name=name, scales=[1.0])
 
 

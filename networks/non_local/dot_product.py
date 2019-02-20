@@ -1,6 +1,7 @@
 # The referenced code can be found here : https://github.com/AlexHex7/Non-local_pytorch
+import torch
 from torch import nn
-
+from torch.nn import functional as F
 
 class _NonLocalBlock2D_Dot_Product(nn.Module):
     def __init__(self, in_channels, inter_channels=None, dimension=3, sub_sample=True, bn_layer=True):

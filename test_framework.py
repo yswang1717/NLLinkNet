@@ -59,6 +59,8 @@ class TTAFramework():
             return self.test_one_img_from_path_4(path, scales)
 
     def test_one_img_from_path_4(self, path, scales):
+
+        #stack transformed imgs for img1, img2, img3, img4
         img = cv2.imread(path)  # .transpose(2,0,1)[None]
         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         img90 = np.array(np.rot90(img))
@@ -91,6 +93,7 @@ class TTAFramework():
         return mask2
 
     def test_one_img_from_path_2(self, path, scales):
+        #stack transformed imgs for img1, img2, img3, img4, img5, img6
         img = cv2.imread(path)  # .transpose(2,0,1)[None]
         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         img90 = np.array(np.rot90(img))
@@ -119,6 +122,7 @@ class TTAFramework():
         return mask3
 
     def test_one_img_from_path_1(self, path, scales):
+        #stack transformed imgs for img1, img2, img3, img4, img5
         img = cv2.imread(path)  # .transpose(2,0,1)[None]
         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         img90 = np.array(np.rot90(img))

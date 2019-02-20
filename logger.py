@@ -1,3 +1,4 @@
+import os 
 class Logger(object):
     def __init__(self, path):
         self.file = open(path, 'a+')
