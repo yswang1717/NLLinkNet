@@ -83,7 +83,7 @@ Please download this file to 'weights/'
 
 
 ### 1. NL-LinkNet Architecture 
-NL-LinkNet is composed of local block (LB) and non-local block (NLB). We employee ResNet34 as our LB according to sate-of-the-art (D-LinkNet)  
+NL-LinkNet is composed of local block (LB) and non-local block (NLB). We employee ResNet34 as our LB according to sate-of-the-art (D-LinkNet).
 
 <p align="center"> 
     <img width=650 src="./imgs/NonlocalNetwork.jpg"> 
