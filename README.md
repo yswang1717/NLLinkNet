@@ -2,6 +2,7 @@
 Pytorch implementation of **N**on-**L**ocal LinkNet (**NL-LinkNet**) which outperforms the 1st ranked solution of DeepGlobe Road Extraction Challenge (**D-LinkNet**). It achieves 64.90% even better than the ensemble of D-LinkNet, LinkNet, U-Net (64.66%). The referenced code can be found [here](https://github.com/zlkanata/DeepGlobe-Road-Extraction-Challenge)
 
 This version is revised by 20 Feb, 2019 
+
 ## Basic Overview 
 Since the VHR satellie images are taken at high distances, roads(red box) are likely to be covered by ostacles such as shadows, clouds, trees as a below figure. Therefore, capturing long-range dependencies(orange box) is essential. NL-LinkNet use nonlocal operations which compute feature map as a weighted sum of all pixels. It is a key to solve it. 
 
@@ -72,6 +73,8 @@ To generate mask images with **NL34_LinkNet** **with** multi-scaled test (MS) :
     python3 test.py --model NL34_LinkNet --name 'NL34_LinkNet' --source '../dataset/Road/valid' --scales 0.75 1.0 1.25 --target 'NL34_LinkNet_MS'
 
 ### Download trained NL4-LinkNet
+
+Please download this file to 'weights/'
 
 - NL4-LinkNet : [Dropbox](https://www.dropbox.com/s/ra6i25wswmsu6y0/NL34_LinkNet.th?dl=0) (64.40%, 64.90% w/ MS[0.75,1.0,1.25])
 - NL34-LinkNet : [Dropbox](https://www.dropbox.com/s/ra6i25wswmsu6y0/NL34_LinkNet.th?dl=0) (64.59%, 65.00% w/ MS[0.75,1.0,1.25])
