@@ -44,7 +44,7 @@ However, note that you cannot evaluate your own dataset file on the server.
 
 ### Train
 
-**To train** model in different settings (locations, pairwise functions), please refer [here](https://github.com/yswang0522/NLLinkNetRoadExtraction/blob/master/run_example.sh)
+**To train** model in different settings (locations, pairwise functions), please refer [here](https://github.com/yswang0522/NLLinkNetRoadExtraction/blob/master/run_example.sh).
 
 To train **NL-LinkNet**(general):
 
