@@ -6,3 +6,5 @@ class Logger(object):
         print(log) 
     def close(self): 
         self.file.close() 
+    def flush(self): 
+        self.file.flush() 

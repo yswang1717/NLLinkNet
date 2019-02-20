@@ -20,7 +20,7 @@ class Baseline(nn.Module):
     def __init__(self, num_classes=1, num_channels=3):
         super(Baseline, self).__init__()
 
-        filters = [64, 128, 256, 512]
+        filters = (64, 128, 256, 512)
         resnet = models.resnet34(pretrained=True)
         self.firstconv = resnet.conv1
         self.firstbn = resnet.bn1
@@ -71,7 +71,7 @@ class NL3_LinkNet(nn.Module): # add non-local block
     def __init__(self, num_classes=1, num_channels=3):
         super(NL3_LinkNet, self).__init__()
 
-        filters = [64, 128, 256, 512]
+        filters = (64, 128, 256, 512)
         resnet = models.resnet34(pretrained=True)
         self.firstconv = resnet.conv1
         self.firstbn = resnet.bn1
@@ -125,7 +125,7 @@ class NL4_LinkNet(nn.Module): # add non-local block
     def __init__(self, num_classes=1, num_channels=3):
         super(NL4_LinkNet, self).__init__()
 
-        filters = [64, 128, 256, 512]
+        filters = (64, 128, 256, 512)
         resnet = models.resnet34(pretrained=True)
         self.firstconv = resnet.conv1
         self.firstbn = resnet.bn1
@@ -180,7 +180,7 @@ class NL34_LinkNet(nn.Module): # add non-local block
     def __init__(self, num_classes=1, num_channels=3):
         super(NL34_LinkNet, self).__init__()
 
-        filters = [64, 128, 256, 512]
+        filters = (64, 128, 256, 512)
         resnet = models.resnet34(pretrained=True)
         self.firstconv = resnet.conv1
         self.firstbn = resnet.bn1

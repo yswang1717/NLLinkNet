@@ -22,7 +22,7 @@ class NL_LinkNet_DotProduct(nn.Module): # add non-local block
     def __init__(self, num_classes=1, num_channels=3):
         super(NL_LinkNet_DotProduct, self).__init__()
 
-        filters = [64, 128, 256, 512]
+        filters = (64, 128, 256, 512)
         resnet = models.resnet34(pretrained=True)
         self.firstconv = resnet.conv1
         self.firstbn = resnet.bn1
@@ -86,7 +86,7 @@ class NL_LinkNet_Gaussian(nn.Module): # add non-local block
     def __init__(self, num_classes=1, num_channels=3):
         super(NL_LinkNet_Gaussian, self).__init__()
 
-        filters = [64, 128, 256, 512]
+        filters = (64, 128, 256, 512)
         resnet = models.resnet34(pretrained=True)
         self.firstconv = resnet.conv1
         self.firstbn = resnet.bn1
@@ -150,7 +150,7 @@ class NL_LinkNet_EGaussian(nn.Module): # add non-local block
     def __init__(self, num_classes=1, num_channels=3):
         super(NL_LinkNet_EGaussian, self).__init__()
 
-        filters = [64, 128, 256, 512]
+        filters = (64, 128, 256, 512)
         resnet = models.resnet34(pretrained=True)
         self.firstconv = resnet.conv1
         self.firstbn = resnet.bn1

@@ -18,7 +18,7 @@ class DinkNet34(nn.Module):
     def __init__(self, num_classes=1, num_channels=3):
         super(DinkNet34, self).__init__()
 
-        filters = [64, 128, 256, 512]
+        filters = (64, 128, 256, 512)
         resnet = models.resnet34(pretrained=True)
         self.firstconv = resnet.conv1
         self.firstbn = resnet.bn1
@@ -74,7 +74,7 @@ class LinkNet34(nn.Module):
     def __init__(self, num_classes=1):
         super(LinkNet34, self).__init__()
 
-        filters = [64, 128, 256, 512]
+        filters = (64, 128, 256, 512)
         resnet = models.resnet34(pretrained=True)
         self.firstconv = resnet.conv1 #3x3, 64, ks=7,s=2, p=3) 
         self.firstbn = resnet.bn1 

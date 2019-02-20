@@ -28,7 +28,7 @@ from test_framework import TTAFramework
 from logger import Logger 
 import argparse
 
-def train_models(model,name,crop_size=(1024,1024),init_learning_rate=0.0003,dataset='../dataset/Road/train/',load='',BATCHSIZE_PER_CARD = 1): 
+def train_models(model,name,crop_size=(1024,1024),init_learning_rate=0.0003,dataset='../dataset/Road/train/',load='',BATCHSIZE_PER_CARD = 4): 
    
     if type(crop_size) == tuple: 
         crop_size = list(crop_size) 
