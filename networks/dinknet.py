@@ -1,21 +1,16 @@
 """
 Codes of LinkNet based on https://github.com/snakers4/spacenet-three
 """
-import torch
+
 import torch.nn as nn
-from torch.autograd import Variable
+import torch.nn.functional as F
 from torchvision import models
 
-import torch.nn.functional as F
+from networks.common_module import Dblock, DecoderBlock, nonlinearity
 
-from networks.common_module import Dblock_more_dilate, Dblock, DecoderBlock
-
-from functools import partial
-
-nonlinearity = partial(F.relu,inplace=True)
 
 class DinkNet34(nn.Module):
-    def __init__(self, num_classes=1, num_channels=3):
+    def __init__(self, num_classes=1):
         super(DinkNet34, self).__init__()
 
         filters = (64, 128, 256, 512)
@@ -28,7 +23,7 @@ class DinkNet34(nn.Module):
         self.encoder2 = resnet.layer2
         self.encoder3 = resnet.layer3
         self.encoder4 = resnet.layer4
-        
+
         self.dblock = Dblock(512)
 
         self.decoder4 = DecoderBlock(filters[3], filters[2])
@@ -52,7 +47,7 @@ class DinkNet34(nn.Module):
         e2 = self.encoder2(e1)
         e3 = self.encoder3(e2)
         e4 = self.encoder4(e3)
-        
+
         # Center
         e4 = self.dblock(e4)
 
@@ -61,7 +56,7 @@ class DinkNet34(nn.Module):
         d3 = self.decoder3(d4) + e2
         d2 = self.decoder2(d3) + e1
         d1 = self.decoder1(d2)
-        
+
         out = self.finaldeconv1(d1)
         out = self.finalrelu1(out)
         out = self.finalconv2(out)
@@ -70,21 +65,22 @@ class DinkNet34(nn.Module):
 
         return F.sigmoid(out)
 
+
 class LinkNet34(nn.Module):
     def __init__(self, num_classes=1):
         super(LinkNet34, self).__init__()
 
         filters = (64, 128, 256, 512)
         resnet = models.resnet34(pretrained=True)
-        self.firstconv = resnet.conv1 #3x3, 64, ks=7,s=2, p=3) 
-        self.firstbn = resnet.bn1 
+        self.firstconv = resnet.conv1  # 3x3, 64, ks=7,s=2, p=3)
+        self.firstbn = resnet.bn1
         self.firstrelu = resnet.relu
         self.firstmaxpool = resnet.maxpool
-        
-        self.encoder1 = resnet.layer1 #bottleneck(1x1-3x3-1x1+), 64, [3,4,6,3] 
-        self.encoder2 = resnet.layer2 #bottleneck(), 128, 4, st=2 
-        self.encoder3 = resnet.layer3 #bottleneck, 256, 6, st=2
-        self.encoder4 = resnet.layer4 #bottleneck, 512, 3, st=2
+
+        self.encoder1 = resnet.layer1  # bottleneck(1x1-3x3-1x1+), 64, [3,4,6,3]
+        self.encoder2 = resnet.layer2  # bottleneck(), 128, 4, st=2
+        self.encoder3 = resnet.layer3  # bottleneck, 256, 6, st=2
+        self.encoder4 = resnet.layer4  # bottleneck, 512, 3, st=2
 
         self.decoder4 = DecoderBlock(filters[3], filters[2])
         self.decoder3 = DecoderBlock(filters[2], filters[1])
@@ -96,7 +92,7 @@ class LinkNet34(nn.Module):
         self.finalconv2 = nn.Conv2d(32, 32, 3)
         self.finalrelu2 = nonlinearity
         self.finalconv3 = nn.Conv2d(32, num_classes, 2, padding=1)
- 
+
     def forward(self, x):
         # Encoder
         x = self.firstconv(x)
@@ -107,7 +103,7 @@ class LinkNet34(nn.Module):
         e2 = self.encoder2(e1)
         e3 = self.encoder3(e2)
         e4 = self.encoder4(e3)
-        
+
         # Decoder
         d4 = self.decoder4(e4) + e3
         d3 = self.decoder3(d4) + e2

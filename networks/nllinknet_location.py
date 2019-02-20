@@ -1,23 +1,16 @@
 """
 Codes of LinkNet based on https://github.com/snakers4/spacenet-three
 """
-import torch
 import torch.nn as nn
-from torch.autograd import Variable
+import torch.nn.functional as F
 from torchvision import models
 
-from networks.common_module import Dblock_more_dilate, Dblock, DecoderBlock
+from networks.common_module import DecoderBlock, nonlinearity
 from networks.non_local.embedded_gaussian import NONLocalBlock2D_EGaussian
 
-import torch.nn.functional as F
 
-
-from functools import partial
-
-nonlinearity = partial(F.relu,inplace=True)
-    
 class Baseline(nn.Module):
-    def __init__(self, num_classes=1, num_channels=3):
+    def __init__(self, num_classes=1):
         super(Baseline, self).__init__()
 
         filters = (64, 128, 256, 512)
@@ -52,13 +45,13 @@ class Baseline(nn.Module):
         e2 = self.encoder2(e1)
         e3 = self.encoder3(e2)
         e4 = self.encoder4(e3)
-        
+
         # Decoder
         d4 = self.decoder4(e4) + e3
         d3 = self.decoder3(d4) + e2
         d2 = self.decoder2(d3) + e1
         d1 = self.decoder1(d2)
-        
+
         out = self.finaldeconv1(d1)
         out = self.finalrelu1(out)
         out = self.finalconv2(out)
@@ -67,7 +60,8 @@ class Baseline(nn.Module):
 
         return F.sigmoid(out)
 
-class NL3_LinkNet(nn.Module): # add non-local block 
+
+class NL3_LinkNet(nn.Module):  # add non-local block
     def __init__(self, num_classes=1, num_channels=3):
         super(NL3_LinkNet, self).__init__()
 
@@ -77,13 +71,13 @@ class NL3_LinkNet(nn.Module): # add non-local block
         self.firstbn = resnet.bn1
         self.firstrelu = resnet.relu
         self.firstmaxpool = resnet.maxpool
-        
+
         self.encoder1 = resnet.layer1
         self.encoder2 = resnet.layer2
-        self.nonlocal3 = NONLocalBlock2D_EGaussian(128) 
+        self.nonlocal3 = NONLocalBlock2D_EGaussian(128)
         self.encoder3 = resnet.layer3
         self.encoder4 = resnet.layer4
-        
+
         self.decoder4 = DecoderBlock(filters[3], filters[2])
         self.decoder3 = DecoderBlock(filters[2], filters[1])
         self.decoder2 = DecoderBlock(filters[1], filters[0])
@@ -101,18 +95,18 @@ class NL3_LinkNet(nn.Module): # add non-local block
         x = self.firstbn(x)
         x = self.firstrelu(x)
         x = self.firstmaxpool(x)
-        e1 = self.encoder1(x) 
+        e1 = self.encoder1(x)
         e2 = self.encoder2(e1)
-        e3 = self.nonlocal3(e2) 
+        e3 = self.nonlocal3(e2)
         e3 = self.encoder3(e3)
         e4 = self.encoder4(e3)
-        
+
         # Decoder
         d4 = self.decoder4(e4) + e3
         d3 = self.decoder3(d4) + e2
         d2 = self.decoder2(d3) + e1
         d1 = self.decoder1(d2)
-        
+
         out = self.finaldeconv1(d1)
         out = self.finalrelu1(out)
         out = self.finalconv2(out)
@@ -121,7 +115,8 @@ class NL3_LinkNet(nn.Module): # add non-local block
 
         return F.sigmoid(out)
 
-class NL4_LinkNet(nn.Module): # add non-local block 
+
+class NL4_LinkNet(nn.Module):  # add non-local block
     def __init__(self, num_classes=1, num_channels=3):
         super(NL4_LinkNet, self).__init__()
 
@@ -131,13 +126,13 @@ class NL4_LinkNet(nn.Module): # add non-local block
         self.firstbn = resnet.bn1
         self.firstrelu = resnet.relu
         self.firstmaxpool = resnet.maxpool
-        
+
         self.encoder1 = resnet.layer1
         self.encoder2 = resnet.layer2
         self.encoder3 = resnet.layer3
-        self.nonlocal4 = NONLocalBlock2D_EGaussian(256) 
+        self.nonlocal4 = NONLocalBlock2D_EGaussian(256)
         self.encoder4 = resnet.layer4
-        
+
         self.decoder4 = DecoderBlock(filters[3], filters[2])
         self.decoder3 = DecoderBlock(filters[2], filters[1])
         self.decoder2 = DecoderBlock(filters[1], filters[0])
@@ -161,13 +156,13 @@ class NL4_LinkNet(nn.Module): # add non-local block
         e3 = self.encoder3(e2)
         e3 = self.nonlocal4(e3)
         e4 = self.encoder4(e3)
-        
+
         # Decoder
         d4 = self.decoder4(e4) + e3
         d3 = self.decoder3(d4) + e2
         d2 = self.decoder2(d3) + e1
         d1 = self.decoder1(d2)
-        
+
         out = self.finaldeconv1(d1)
         out = self.finalrelu1(out)
         out = self.finalconv2(out)
@@ -175,8 +170,9 @@ class NL4_LinkNet(nn.Module): # add non-local block
         out = self.finalconv3(out)
 
         return F.sigmoid(out)
-    
-class NL34_LinkNet(nn.Module): # add non-local block 
+
+
+class NL34_LinkNet(nn.Module):  # add non-local block
     def __init__(self, num_classes=1, num_channels=3):
         super(NL34_LinkNet, self).__init__()
 
@@ -186,14 +182,14 @@ class NL34_LinkNet(nn.Module): # add non-local block
         self.firstbn = resnet.bn1
         self.firstrelu = resnet.relu
         self.firstmaxpool = resnet.maxpool
-        
+
         self.encoder1 = resnet.layer1
         self.encoder2 = resnet.layer2
-        self.nonlocal3 = NONLocalBlock2D_EGaussian(128) 
+        self.nonlocal3 = NONLocalBlock2D_EGaussian(128)
         self.encoder3 = resnet.layer3
-        self.nonlocal4 = NONLocalBlock2D_EGaussian(256) 
+        self.nonlocal4 = NONLocalBlock2D_EGaussian(256)
         self.encoder4 = resnet.layer4
-        
+
         self.decoder4 = DecoderBlock(filters[3], filters[2])
         self.decoder3 = DecoderBlock(filters[2], filters[1])
         self.decoder2 = DecoderBlock(filters[1], filters[0])
@@ -211,22 +207,22 @@ class NL34_LinkNet(nn.Module): # add non-local block
         x = self.firstbn(x)
         x = self.firstrelu(x)
         x = self.firstmaxpool(x)
-        e1 = self.encoder1(x) 
+        e1 = self.encoder1(x)
         e2 = self.encoder2(e1)
-        e3 = self.nonlocal3(e2) 
+        e3 = self.nonlocal3(e2)
         e3 = self.encoder3(e3)
         e4 = self.nonlocal4(e3)
         e4 = self.encoder4(e4)
-        
+
         # Center
-        #e4 = self.dblock(e4)
+        # e4 = self.dblock(e4)
 
         # Decoder
         d4 = self.decoder4(e4) + e3
         d3 = self.decoder3(d4) + e2
         d2 = self.decoder2(d3) + e1
         d1 = self.decoder1(d2)
-        
+
         out = self.finaldeconv1(d1)
         out = self.finalrelu1(out)
         out = self.finalconv2(out)

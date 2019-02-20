@@ -1,5 +1,4 @@
-#The referenced code can be found here : https://github.com/AlexHex7/Non-local_pytorch 
-import torch
+# The referenced code can be found here : https://github.com/AlexHex7/Non-local_pytorch
 from torch import nn
 from torch.nn import functional as F
 
@@ -8,7 +7,7 @@ class _NonLocalBlock2D_EGaussian(nn.Module):
     def __init__(self, in_channels, inter_channels=None, dimension=3, sub_sample=True, bn_layer=True):
         super(_NonLocalBlock2D_EGaussian, self).__init__()
 
-        assert dimension in [1, 2, 3]
+        assert dimension in (1, 2, 3)
 
         self.dimension = dimension
         self.sub_sample = sub_sample
@@ -52,14 +51,7 @@ class _NonLocalBlock2D_EGaussian(nn.Module):
             self.phi = nn.Sequential(self.phi, max_pool_layer)
 
     def forward(self, x):
-        '''
-        :param x: (b, c, t, h, w)
-        :return:
-        '''
-
         batch_size = x.size(0)
-        #torch.Size([4, 64, 128, 128]) 4 128
-        #print('test ', x.shape, batch_size, self.inter_channels)
         g_x = self.g(x).view(batch_size, self.inter_channels, -1)
         g_x = g_x.permute(0, 2, 1)
 
@@ -81,19 +73,16 @@ class _NonLocalBlock2D_EGaussian(nn.Module):
 class NONLocalBlock2D_EGaussian(_NonLocalBlock2D_EGaussian):
     def __init__(self, in_channels, inter_channels=None, sub_sample=True, bn_layer=True):
         super(NONLocalBlock2D_EGaussian, self).__init__(in_channels,
-                                              inter_channels=inter_channels,
-                                              dimension=2, sub_sample=sub_sample,
-                                              bn_layer=bn_layer)
+                                                        inter_channels=inter_channels,
+                                                        dimension=2, sub_sample=sub_sample,
+                                                        bn_layer=bn_layer)
 
 
 if __name__ == '__main__':
     import torch
 
     for (sub_sample, bn_layer) in [(True, True), (False, False), (True, False), (False, True)]:
-
         img = torch.zeros(2, 3, 20, 20)
         net = NONLocalBlock2D_EGaussian(3, sub_sample=sub_sample, bn_layer=bn_layer)
         out = net(img)
         print(out.size())
-
-
