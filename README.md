@@ -1,5 +1,5 @@
 # NL-LinkNet for Road Extraction 
-Pytorch implementation of **N**on-**L**ocal LinkNet (**NL-LinkNet**). It performs **65.00%** mIOU scores which is better than the 1st ranked single-model solution (D-LinkNet, 64.12%) in DeepGlobe Road Extraction Challenge. It also outperforms the ensemble of D-LinkNet, LinkNet, U-Net (64.66%). The referenced code can be found [here](https://github.com/zlkanata/DeepGlobe-Road-Extraction-Challenge)
+Pytorch implementation of **N**on-**L**ocal LinkNet (**NL-LinkNet**). It performs **65.00%** mIOU scores which is better than the 1st ranked single-model solution (D-LinkNet, 64.12%) in DeepGlobe Road Extraction Challenge. It also outperforms the ensemble of D-LinkNet, LinkNet, U-Net (64.66%). The referenced code can be found [here](https://github.com/zlkanata/DeepGlobe-Road-Extraction-Challenge).
 
 This version is revised by 20 Feb, 2019 
 
