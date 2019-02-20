@@ -128,6 +128,6 @@ This is quantitative comparison of our best models with the previous state-of-th
 
 Yooseung Wang / [@yswang0522](https://github.com/yswang0522) 
 
-Junghoon Seo / [@mikigom](http://kimigom.github.io)
+Junghoon Seo / [@mikigom](http://mkimigom.github.io/about)
 
 Taegyun Jeon / [@tgjeon](https://github.com/tgjeon)
