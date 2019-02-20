@@ -108,11 +108,11 @@ This is leaderboard of [DeepGlobe Road Extraction Challenge](https://competition
 
 csv file is [here](https://github.com/yswang0522/NLLinkNetRoadExtraction/blob/master/imgs/DeepGlobe_Road_Extraction_Challenge_results.csv)
 
-<p align="center"> <img width=500 src="./imgs/leaderboard.jpg"> </p>
+<p align="center"> <img width=600 src="./imgs/leaderboard.jpg"> </p>
 
 This is quantitative comparison of our best models with the previous state-of-the-art models in challenge. 
 
-<p align="center"> <img src="./imgs/table_benchmarks.jpg"> </p>
+<p align="center"> <img width=500 src="./imgs/table_benchmarks.jpg"> </p>
 
 
 
@@ -122,7 +122,7 @@ This is quantitative comparison of our best models with the previous state-of-th
 
 ### 4. Results on Different pairwise functions 
 
-<p align="center"> <img src="./imgs/table_pf.jpg"> </p> 
+<p align="center"> <img width=500 src="./imgs/table_pf.jpg"> </p> 
 
 
 ## Author 
