@@ -1,5 +1,5 @@
 # NL-LinkNet for Road Extraction 
-Pytorch implementation of **N**on-**L**ocal LinkNet (**NL-LinkNet**) which outperforms the 1st ranked solution of DeepGlobe Road Extraction Challenge (**D-LinkNet**). It achieves 64.90% even better than the ensemble of D-LinkNet, LinkNet, U-Net (64.66%). The referenced code can be found [here](https://github.com/zlkanata/DeepGlobe-Road-Extraction-Challenge)
+Pytorch implementation of **N**on-**L**ocal LinkNet (**NL-LinkNet**). It performs **65.00%** mIOU scores which is better than the 1st ranked solution (D-LinkNet, 64.12%) in DeepGlobe Road Extraction Challenge. It also outperforms the ensemble of D-LinkNet, LinkNet, U-Net (64.66%). The referenced code can be found [here](https://github.com/zlkanata/DeepGlobe-Road-Extraction-Challenge)
 
 This version is revised by 20 Feb, 2019 
 
@@ -64,11 +64,11 @@ To generate mask images:
 
     python3 test.py --model model_name --name 'name_of_weights' --source 'path of input images' --scales 1.0 --target 'name_of_output_dir'
     
-To generate mask images with **NL34_LinkNet** **w/o** multi-scaled test (MS) : 
+To generate mask images with NL34_LinkNet **without** multi-scaled test (MS) : 
 
     python3 test.py --model NL34_LinkNet --name 'NL34_LinkNet' --source '../dataset/Road/valid' --scales 1.0 --target 'NL34_LinkNet'
 
-To generate mask images with **NL34_LinkNet** **with** multi-scaled test (MS) : 
+To generate mask images with NL34_LinkNet **with** multi-scaled test (MS) : 
 
     python3 test.py --model NL34_LinkNet --name 'NL34_LinkNet' --source '../dataset/Road/valid' --scales 0.75 1.0 1.25 --target 'NL34_LinkNet_MS'
 
@@ -78,6 +78,7 @@ Please download this file to 'weights/'
 
 - NL4-LinkNet : [Dropbox](https://www.dropbox.com/s/ra6i25wswmsu6y0/NL34_LinkNet.th?dl=0) (64.40%, 64.90% w/ MS[0.75,1.0,1.25])
 - NL34-LinkNet : [Dropbox](https://www.dropbox.com/s/ra6i25wswmsu6y0/NL34_LinkNet.th?dl=0) (64.59%, 65.00% w/ MS[0.75,1.0,1.25])
+
 ## Methods
 
 
@@ -105,7 +106,7 @@ Nonlocal block computes weighted sum of all pixels for an output pixel. We consi
 ### 2. Quantitative Comparison 
 This is leaderboard of [DeepGlobe Road Extraction Challenge](https://competitions.codalab.org/competitions/18467) @ CodaLab
 
-csv file is [here](https://github.com/yswang0522/NLLinkNetRoadExtraction/blob/master/imgs/DeepGlobe_Road%20Extraction_Challenge_results.csv)
+csv file is [here](https://github.com/yswang0522/NLLinkNetRoadExtraction/blob/master/imgs/DeepGlobe_Road_Extraction_Challenge_results.csv)
 
 <p align="center"> <img width=500 src="./imgs/leaderboard.jpg"> </p>
 
