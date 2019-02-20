@@ -132,13 +132,3 @@ Yooseung Wang / [@yswang0522](https://github.com/yswang0522)
 Junghoon Seo / [@mikigom](http://kimigom.github.io)
 
 Taegyun Jeon / [@tgjeon](https://github.com/tgjeon)
-
-## Citation 
-    @article{UNet,
-      author =   {Wang, Yoo Seung and Seo, Jung Hoon and Jeon, Tae Gyun},
-      title =    {NL-LinkNet: Non-Local LinkNet for Road Extraction from VHR Statellite Imagse},
-      journal =  {arxiv:1902.11111},
-      month =    {Feb.}, 
-      year =     {2019}
-    }
-
