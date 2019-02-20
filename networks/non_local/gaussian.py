@@ -1,5 +1,4 @@
-#The referenced code can be found here : https://github.com/AlexHex7/Non-local_pytorch 
-import torch
+# The referenced code can be found here : https://github.com/AlexHex7/Non-local_pytorch
 from torch import nn
 from torch.nn import functional as F
 
@@ -8,7 +7,7 @@ class _NonLocalBlock2D_Gaussian(nn.Module):
     def __init__(self, in_channels, inter_channels=None, dimension=3, sub_sample=True, bn_layer=True):
         super(_NonLocalBlock2D_Gaussian, self).__init__()
 
-        assert dimension in [1, 2, 3]
+        assert dimension in (1, 2, 3)
 
         self.dimension = dimension
         self.sub_sample = sub_sample
@@ -20,7 +19,6 @@ class _NonLocalBlock2D_Gaussian(nn.Module):
             self.inter_channels = in_channels // 2
             if self.inter_channels == 0:
                 self.inter_channels = 1
-
 
         conv_nd = nn.Conv2d
         max_pool_layer = nn.MaxPool2d(kernel_size=(2, 2))
@@ -48,11 +46,6 @@ class _NonLocalBlock2D_Gaussian(nn.Module):
             self.phi = max_pool_layer
 
     def forward(self, x):
-        '''
-        :param x: (b, c, t, h, w)
-        :return:
-        '''
-
         batch_size = x.size(0)
 
         g_x = self.g(x).view(batch_size, self.inter_channels, -1)
@@ -82,9 +75,10 @@ class _NonLocalBlock2D_Gaussian(nn.Module):
 class NONLocalBlock2D_Gaussian(_NonLocalBlock2D_Gaussian):
     def __init__(self, in_channels, inter_channels=None, sub_sample=True, bn_layer=True):
         super(NONLocalBlock2D_Gaussian, self).__init__(in_channels,
-                                              inter_channels=inter_channels,
-                                              dimension=2, sub_sample=sub_sample,
-                                              bn_layer=bn_layer)
+                                                       inter_channels=inter_channels,
+                                                       dimension=2, sub_sample=sub_sample,
+                                                       bn_layer=bn_layer)
+
 
 if __name__ == '__main__':
     import torch
@@ -94,7 +88,3 @@ if __name__ == '__main__':
         net = NONLocalBlock2D_Gaussian(3, sub_sample=sub_sample, bn_layer=bn_layer)
         out = net(img)
         print(out.size())
-
-
-
-
