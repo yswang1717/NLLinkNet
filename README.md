@@ -4,7 +4,7 @@ Pytorch implementation of **N**on-**L**ocal LinkNet (**NL-LinkNet**). It perform
 This version is revised by 20 Feb, 2019 
 
 ## Basic Overview 
-Since the VHR satellie images are taken at high distances, roads(red box) are likely to be covered by ostacles such as shadows, clouds, trees as a below figure. Therefore, capturing long-range dependencies(orange box) is essential. NL-LinkNet use nonlocal operations which compute feature map as a weighted sum of all pixels. It is a key to solve it. 
+Since the VHR satellie images are taken at high distances, roads (red box) are likely to be covered by ostacles such as shadows, clouds, trees as a below figure. Therefore, capturing long-range dependencies (orange box) is essential. NL-LinkNet use nonlocal operations which compute feature map as a weighted sum of all pixels. It is a key to solve it. 
 
 <p align="center"> <img width=500 src="./imgs/NL_Intro_operation.jpg"> </p> 
 
