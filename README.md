@@ -90,7 +90,7 @@ NL-LinkNet is composed of local block (LB) and non-local block (NLB). We employe
 </p> 
 
 ### 2. A Non-local block 
-Nonlocal block computes weighted sum of all pixels for an output pixel. We consider three candidates of pairwise function f. This is an example of Gaussian version f. More details are described in paper. 
+Non-local block computes weighted sum of all pixels for an output pixel. We consider three candidates of pairwise function f. This is an example of Gaussian version f. More details are described in the paper.
 
 <p align="center">
     <img width=650 src="./imgs/NonlocalBlock.jpg"> 
@@ -104,9 +104,8 @@ Nonlocal block computes weighted sum of all pixels for an output pixel. We consi
 <p align="center"> <img src="./imgs/Visual_Comparison.jpg"> </p> 
 
 ### 2. Quantitative Comparison 
-This is leaderboard of [DeepGlobe Road Extraction Challenge](https://competitions.codalab.org/competitions/18467) @ CodaLab
-
-csv file is [here](https://github.com/yswang0522/NLLinkNetRoadExtraction/blob/master/imgs/DeepGlobe_Road_Extraction_Challenge_results.csv)
+This is leaderboard of [DeepGlobe Road Extraction Challenge](https://competitions.codalab.org/competitions/18467) @ CodaLab.
+csv file is [here](https://github.com/yswang0522/NLLinkNetRoadExtraction/blob/master/imgs/DeepGlobe_Road_Extraction_Challenge_results.csv).
 
 <p align="center"> <img width=600 src="./imgs/leaderboard.jpg"> </p>
 
