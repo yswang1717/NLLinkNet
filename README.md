@@ -126,8 +126,11 @@ This is quantitative comparison of our best models with the previous state-of-th
 
 ## Author 
 
+Anonymous authors
+<!--
 Yooseung Wang / [@yswang0522](https://github.com/yswang0522) 
 
 Junghoon Seo / [@mikigom](http://mikigom.github.io/about)
 
 Taegyun Jeon / [@tgjeon](https://github.com/tgjeon)
+ -->
