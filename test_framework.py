@@ -4,6 +4,7 @@ import scipy
 import scipy.misc
 import torch
 import torch.nn as nn
+from PIL import Image
 from torch.autograd import Variable as V
 
 BATCHSIZE_PER_CARD = 1
@@ -23,11 +24,13 @@ class TTAFramework():
             scaled_imgs = scaling(imgs)  # 8, 3, 1024,1024
             out = self.net.forward(scaled_imgs).squeeze().cpu().data.numpy()
             # downsampling
-            scaled_size = [ch, cw]
+            # scaled_size = [ch, cw]
+            scaled_size = [cw, ch]
 
             for fs in range(flip_size):
-                scaled_mask = scipy.misc.imresize(out[fs], scaled_size, interp='bilinear', mode=None)
-                scaled_mask = np.divide(scaled_mask, 255)
+                # scaled_mask = scipy.misc.imresize(out[fs], scaled_size, interp='bilinear', mode=None)
+                scaled_mask = np.array(Image.fromarray(out[fs]).resize(scaled_size, resample=Image.BILINEAR))
+                # scaled_mask = np.divide(scaled_mask, 255)
                 ms_mask[fs] = ms_mask[fs] + scaled_mask
 
         return ms_mask
