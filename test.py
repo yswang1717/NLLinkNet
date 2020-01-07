@@ -77,6 +77,8 @@ def main():
 
     for ckpt_digit in ckpts_digit:
         target = os.path.join(ckpts_dir, 'Results', ckpt_digit)
+        if os.path.isdir(target):
+            continue
         os.makedirs(target, exist_ok=True)
 
         weights = os.path.join(ckpts_dir, ckpt_digit)
